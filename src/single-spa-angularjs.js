@@ -48,7 +48,7 @@ function bootstrap(opts) {
   return Promise.resolve();
 }
 
-function mount(opts, mountedInstances) {
+function mount(opts, mountedInstances, props) {
   return Promise
     .resolve()
     .then(() => {
@@ -69,6 +69,8 @@ function mount(opts, mountedInstances) {
       if (opts.template) {
         bootstrapEl.innerHTML = opts.template;
       }
+
+      angular.module(opts.mainAngularModule).value('props', props);
 
       if (opts.strictDi) {
         mountedInstances.instance = opts.angular.bootstrap(bootstrapEl, [opts.mainAngularModule], {strictDi: opts.strictDi})
